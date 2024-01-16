@@ -1,0 +1,17 @@
+void sleep()
+{
+    acquire(p->lock);
+    p->state=sleep;
+    p->change=&共享变量;
+    release(p->lock);
+}
+
+void wokeup(j)  //j表示唤醒因j睡着的线程
+{
+    for(int i=0;i<all proc;i++){
+        acquire(i->lock);
+        if(i->state==sleep&&*(i->change)==&j)
+          i->state=runable;
+          release(i->lock);
+    }
+}
